@@ -16,13 +16,11 @@ public class Main {
             list.add(line);
         }
 
-        BankParser bankParser = new BankParser();
-        Integer number = bankParser.parse(list);
+        Integer number = BankParser.parse(list);
         System.out.println(number);
 
         BankValidator bankValidator = new BankValidator();
         System.out.println(bankValidator.validate(number));
-
         System.out.println(bankValidator.validate(345882865));
     }
 }
