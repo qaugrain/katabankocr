@@ -25,7 +25,7 @@ public class BankParser {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Integer parse(List<String> lines) {
+    public static String parse(List<String> lines) {
         // take first 3 char of each line in lines, append them, add them to numbers
         // take next 3 char in each line in lines and redo
         List<String> numbers = new ArrayList<>();
@@ -45,9 +45,9 @@ public class BankParser {
         }
 
         StringBuilder builder = new StringBuilder();
-        numbers.forEach(n -> builder.append(numbersMap.get(n)));
+        numbers.forEach(n -> builder.append(numbersMap.containsKey(n) ? numbersMap.get(n) : "?"));
 
-        return Integer.valueOf(builder.toString());
+        return builder.toString();
     }
 
 }

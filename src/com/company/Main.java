@@ -7,7 +7,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        InputStream input = Main.class.getClassLoader().getResourceAsStream("file.txt");
+        String inputFileName = "file_ERR";
+        InputStream input = Main.class.getClassLoader().getResourceAsStream(inputFileName + ".txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         List<String> list = new ArrayList<>();
@@ -16,11 +17,25 @@ public class Main {
             list.add(line);
         }
 
-        Integer number = BankParser.parse(list);
-        System.out.println(number);
-
+        String number = BankParser.parse(list);
         BankValidator bankValidator = new BankValidator();
-        System.out.println(bankValidator.validate(number));
-        System.out.println(bankValidator.validate(345882865));
+
+        StringBuilder b = new StringBuilder();
+        if(number.contains("?")) {
+            b.append(number);
+            b.append(" ");
+            b.append("ILL");
+        } else if(bankValidator.validate(number)) {
+            b.append(number);
+        } else {
+            b.append(number);
+            b.append(" ");
+            b.append("ERR");
+        }
+
+        String resultFileName = "C:\\Users\\qaugrain\\Desktop\\KATA\\BankOCR\\" + inputFileName + "_result.txt";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(resultFileName, true));
+        writer.append(b);
+        writer.close();
     }
 }

@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class BankValidator {
 
-    public boolean validate(Integer number) {
-        char[] num = Integer.toString(number).toCharArray();
+    public boolean validate(String number) {
+        char[] num = number.toCharArray();
         List<Integer> digits = new ArrayList<>();
         for(char c : num) {
             digits.add(Character.getNumericValue(c));
